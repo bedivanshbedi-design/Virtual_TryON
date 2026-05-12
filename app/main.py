@@ -18,8 +18,6 @@ with col2:
     if uploaded_file:
         result = run_pipeline(uploaded_file)
 
-    if "error" in result:
-        st.error(result["error"])
     else:
         st.image(result["image"], channels="BGR")
         st.success(f"Face Shape: {result['shape']}")
