@@ -1,14 +1,6 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from backend.face_detection import get_landmarks
-from backend.face_shape import classify_face_shape
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from backend.recommender import recommend_glasses
+from .face_detection import get_landmarks
+from .face_shape import classify_face_shape
+from .recommender import recommend_glasses
 
 def run_pipeline(uploaded_file):
     image = ... #convert file to cv2 image
