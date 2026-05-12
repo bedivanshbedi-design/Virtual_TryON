@@ -1,7 +1,9 @@
-import os, sys
-sys.path.insert(0, os.path.dirname(__file__))
+
 import streamlit as st 
 from inference import run_pipeline
+
+import os
+print("FILES:", os.listdir())
 
 st.title("AI Glass Recommender")
 
