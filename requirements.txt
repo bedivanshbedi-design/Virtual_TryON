@@ -1,12 +1,9 @@
 fastapi
 uvicorn
-
 streamlit
 
 mediapipe==0.10.11
-
 opencv-python-headless
 
-numpy
-
-pillow
+numpy<2
+pillow<10
