@@ -1,5 +1,5 @@
 import streamlit as st 
-from backend.inference import run_pipeline
+from app.backend.inference import run_pipeline
 
 st.title("AI Glass Recommender")
 
