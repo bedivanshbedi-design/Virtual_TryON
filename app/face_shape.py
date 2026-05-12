@@ -1,4 +1,6 @@
 def classify_face_shape(landmarks):
+    if landmarks is None:
+        return "unknown"
 
     points = landmarks.landmarks
 

@@ -18,9 +18,12 @@ with col2:
     if uploaded_file:
         result = run_pipeline(uploaded_file)
 
-        st.image(result["image"])
+    if "error" in result:
+        st.error(result["error"])
+    else:
+        st.image(result["image"], channels="BGR")
         st.success(f"Face Shape: {result['shape']}")
         st.write("Recommended:", result["recommendations"])
 
-st.image("assets/glasses/aviator.jpg")
-st.download_button("Download Result", data="Your result text")
+    st.image("assets/glasses/aviator.jpg")
+    st.download_button("Download Result", data="Your result text")

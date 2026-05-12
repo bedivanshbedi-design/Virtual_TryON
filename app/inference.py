@@ -6,16 +6,21 @@ import numpy as np
 import cv2
 
 def run_pipeline(uploaded_file):
-    # 🔥 Convert Streamlit uploaded file → OpenCV image
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    import numpy as np
+    import cv2
+
+    file_bytes = np.frombuffer(uploaded_file.read(), np.uint8)
     image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-    # Safety check
     if image is None:
-        return {"error": "Invalid image uploaded"}
+        return {"error": "Invalid image"}
 
-    # Your pipeline
     landmarks = get_landmarks(image)
+
+    # 🔥 FIX: handle no face detected
+    if landmarks is None:
+        return {"error": "No face detected. Please upload a clear front-face image."}
+
     shape = classify_face_shape(landmarks)
     recs = recommend_glasses(shape)
 
