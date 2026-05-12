@@ -22,6 +22,5 @@ with col2:
         st.success(f"Face Shape: {result['shape']}")
         st.write("Recommended:", result["recommendations"])
 
-st.info(f"Because your face shape is {shape}, angular frames will suit you.")
 st.image("assets/glasses/aviator.jpg")
 st.download_button("Download Result", data="Your result text")
