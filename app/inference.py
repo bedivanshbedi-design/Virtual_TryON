@@ -1,6 +1,6 @@
-from .face_detection import get_landmarks
-from .face_shape import classify_face_shape
-from .recommender import recommend_glasses
+from face_detection import get_landmarks
+from face_shape import classify_face_shape
+from recommender import recommend_glasses
 
 def run_pipeline(uploaded_file):
     image = ... #convert file to cv2 image
