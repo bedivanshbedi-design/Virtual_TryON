@@ -16,6 +16,8 @@ def run_pipeline(uploaded_file):
         return {"error": "Invalid image"}
 
     landmarks = get_landmarks(image)
+    
+    print("LANDMARKS:", landmarks)
 
     # 🔥 FIX: handle no face detected
     if landmarks is None:
