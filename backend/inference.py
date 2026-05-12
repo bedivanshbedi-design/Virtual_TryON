@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from backend.face_detection import get_landmarks
 from backend.face_shape import classify_face_shape
 from backend.recommender import recommend_glasses
