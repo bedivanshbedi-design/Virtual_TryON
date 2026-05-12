@@ -1,8 +1,11 @@
 def classify_face_shape(landmarks):
-    if landmarks is None:
+
+    if landmarks is None or len(landmarks) == 0:
         return "unknown"
 
-    points = landmarks.landmarks
+    # ✅ if mediapipe format
+    face_landmarks = landmarks[0]
+    points = face_landmarks.landmark
 
     face_width = abs(point[234].x - points[454].x)
     face_height = abs(points[10].y - points[152].y)
