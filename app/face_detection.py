@@ -19,8 +19,8 @@ def get_landmarks(image):
         return None
 
     faces = sorted(faces, key = lambda x: x[2]*x[3], reverse=True)
-    (x,y,w,h) = faces[0]
-
+    
+    landmarks = []
 
     for (x, y, w, h) in faces:
         landmarks.append((x, y, w, h))
