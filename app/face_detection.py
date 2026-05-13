@@ -10,9 +10,8 @@ def get_landmarks(image):
 
     faces = face_cascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
-        minNeighbors=6,
-        minSize=(30,30)
+        scaleFactor=1.2,
+        minNeighbors=8,
         )
 
     if len(faces) == 0:
