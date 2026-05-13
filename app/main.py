@@ -6,24 +6,29 @@ import os
 st.title("AI Glass Recommender")
 st.markdown("Upload your photo and get personalized eyewear suggestions!")
 
-col1, col2 = st.columns(2)
+uploaded_file = st.file_uploader("Upload Image", type=["jpg","png"])
 
-with col1:
-    uploaded_file = st.file_uploader("Upload Image", type=["jpg","png"])
+result = None
 
-with col2:
-    if uploaded_file is not None:
+if uploaded_file:
+    try:
         result = run_pipeline(uploaded_file)
 
-    if result["image"] is not None:
+    except Exception as e:
+        st.error(f"Pipeline error: {e}")
+        result = None
+
+
+if result is not None:
+    if result.get("image") is not None:
         img_rgb = cv2.cvtColor(result["image"], cv2.COLOR_BGR2RGB)
         st.image(img_rgb)
 
-        st.success(f"Face Shape: {result['shape']}")
-        st.write("Recommended:", result["recommendations"])
+    st.success(f"Face Shape: {result['shape']}")
+    st.write("Recommended:", result["recommendations"])
     
-    else:
-        st.info("Please upload an image to see results")
+else:
+    st.info("Please upload an image to see results")
 
 st.download_button(
     "Download Result",
