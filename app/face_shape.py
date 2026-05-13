@@ -1,5 +1,5 @@
 def classify_face_shape(landmarks):
-    if not landmarks:
+    if landmarks is None or len(landmarks) == 0:
         return "unknown"
 
     face = landmarks[0]
@@ -7,7 +7,7 @@ def classify_face_shape(landmarks):
     points = face.landmark
 
     face_width = abs(points[234].x - points[454].x)
-    face_height = abs(points[10].x - points[152].x)
+    face_height = abs(points[10].y - points[152].y)
 
     ratio = face_height/face_width
 

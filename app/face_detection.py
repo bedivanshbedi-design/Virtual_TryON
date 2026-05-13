@@ -16,7 +16,7 @@ def get_landmarks(image):
         )
 
     if len(faces) == 0:
-        return []
+        return None
 
     faces = sorted(faces, key = lambda x: x[2]*x[3], reverse=True)
     (x,y,w,h) = faces[0]
