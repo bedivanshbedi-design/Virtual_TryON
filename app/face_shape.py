@@ -1,15 +1,15 @@
 def classify_face_shape(landmarks):
-
-    if landmarks is None or len(landmarks) == 0:
+    if not landmarks:
         return "unknown"
 
-    face_landmarks = landmarks[0]
-    points = face_landmarks.landmark
+    face = landmarks[0]
 
-    face_width = abs(point[234].x - points[454].x)
-    face_height = abs(points[10].y - points[152].y)
+    points = face.landmark
 
-    ratio = face_height / face_width
+    face_width = abs(points[234].x - points[454].x)
+    face_height = abs(points[10].x - points[152].x)
+
+    ratio = face_height/face_width
 
     if ratio > 1.5:
         return "Oval"
