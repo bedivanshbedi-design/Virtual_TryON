@@ -12,7 +12,7 @@ def get_landmarks(image):
         gray,
         scaleFactor=1.1,
         minNeighbors=6,
-        miniSize=(30,30)
+        minSize=(30,30)
         )
 
     if len(faces) == 0:
