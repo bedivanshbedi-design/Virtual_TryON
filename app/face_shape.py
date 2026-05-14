@@ -14,7 +14,6 @@ def classify_face_shape(landmarks):
     chin = p[152]
     forehead_top = p[10]
 
-    # Optional: cheekbones (important for accuracy)
     left_cheek = p[50]
     right_cheek = p[280]
 
@@ -24,30 +23,36 @@ def classify_face_shape(landmarks):
     cheek_width = right_cheek.x - left_cheek.x
     face_height = chin.y - forehead_top.y
 
-    # Ratios (normalize everything)
+    # Ratios
     height_ratio = face_height / jaw_width
-    forehead_jaw_ratio = forehead_width / jaw_width
-    cheek_jaw_ratio = cheek_width / jaw_width
+    fw_jaw = forehead_width / jaw_width
+    cheek_jaw = cheek_width / jaw_width
 
-    # ✅ High-sensitivity classification
+    # ✅ DEBUG (important)
+    print(f"h:{height_ratio:.2f}, fw:{fw_jaw:.2f}, cheek:{cheek_jaw:.2f}")
+
+    # ✅ PRIORITY ORDER (important)
+
+    # 1. Oval → tall face
     if height_ratio > 1.45:
         return "Oval"
 
-    elif cheek_jaw_ratio > 1.08 and cheek_width > forehead_width:
-        return "Diamond"
-
-    elif abs(forehead_jaw_ratio - 1.0) < 0.05:
-        return "Square"
-
-    elif forehead_jaw_ratio > 1.08:
+    # 2. Heart → wide forehead, narrow jaw
+    if fw_jaw > 1.10:
         return "Heart"
 
-    elif cheek_jaw_ratio > 1.02 and height_ratio < 1.35:
+    # 3. Diamond → wide cheekbones
+    if cheek_jaw > 1.10:
+        return "Diamond"
+
+    # 4. Round → wide face, low height
+    if height_ratio < 1.30:
         return "Round"
 
-    else:
-        # fallback with subtle decision
-        if height_ratio > 1.35:
-            return "Oval"
-        else:
-            return "Round"
+    # 5. Square → LAST (strict condition)
+    if abs(fw_jaw - 1.0) < 0.03 and height_ratio < 1.40:
+        return "Square"
+
+    # fallback
+    return "Oval"
+``
