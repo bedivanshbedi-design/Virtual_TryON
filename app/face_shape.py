@@ -1,38 +1,66 @@
-def classify_face_shape(landmarks):
+def classify_face_shape(landmarks, image):
     if landmarks is None:
         return "unknown"
 
+    h_img, w_img, _ = image.shape
     p = landmarks.landmark
 
-    # Points
-    jaw = p[454].x - p[234].x
-    forehead = p[356].x - p[127].x
-    cheek = p[280].x - p[50].x
-    height = p[152].y - p[10].y
+    # ✅ STEP 1: Get face bounding box
+    xs = [lm.x for lm in p]
+    ys = [lm.y for lm in p]
 
-    # Normalize
-    h = height / jaw
-    fw = forehead / jaw
-    cw = cheek / jaw
+    min_x, max_x = int(min(xs) * w_img), int(max(xs) * w_img)
+    min_y, max_y = int(min(ys) * h_img), int(max(ys) * h_img)
 
-    # 🔥 amplify differences
-    h_score = (h - 1.3) * 10
-    fw_score = (fw - 1.0) * 10
-    cw_score = (cw - 1.0) * 10
+    face_w = max_x - min_x
+    face_h = max_y - min_y
 
-    print("DEBUG:", h_score, fw_score, cw_score)
+    if face_w < 50 or face_h < 50:
+        return "face too small"
 
-    # Decision
-    if h_score > 1.5:
-        return "Oval"
+    # ✅ STEP 2: Normalize to face
+    def nx(x): return (x * w_img - min_x) / face_w
+    def ny(y): return (y * h_img - min_y) / face_h
 
-    if fw_score > 1.5:
-        return "Heart"
+    # Key features
+    jaw = nx(p[454].x) - nx(p[234].x)
+    forehead = nx(p[356].x) - nx(p[127].x)
+    cheek = nx(p[280].x) - nx(p[50].x)
+    height = ny(p[152].y) - ny(p[10].y)
 
-    if cw_score > 1.5:
-        return "Diamond"
+    # ✅ STEP 3: Ratios
+    h_ratio = height / jaw
+    fw_ratio = forehead / jaw
+    cw_ratio = cheek / jaw
 
-    if h_score < -1.0:
-        return "Round"
+    # ✅ DEBUG (remove later if needed)
+    print(f"h={h_ratio:.3f}, fw={fw_ratio:.3f}, cw={cw_ratio:.3f}")
 
-    return "Square"
+    # ✅ STEP 4: Scoring system
+    scores = {
+        "Oval": 0,
+        "Round": 0,
+        "Square": 0,
+        "Heart": 0,
+        "Diamond": 0
+    }
+
+    # Oval → taller than wide
+    scores["Oval"] += max(0, (h_ratio - 1.3)) * 5
+
+    # Round → shorter face
+    scores["Round"] += max(0, (1.3 - h_ratio)) * 5
+
+    # Square → balanced widths
+    scores["Square"] += (1 - abs(fw_ratio - 1)) * 3
+
+    # Heart → wider forehead
+    scores["Heart"] += max(0, fw_ratio - 1.05) * 4
+
+    # Diamond → wider cheekbones
+    scores["Diamond"] += max(0, cw_ratio - 1.05) * 4
+
+    print("Scores:", scores)
+
+    # ✅ STEP 5: Return best match
+    return max(scores, key=scores.get)
