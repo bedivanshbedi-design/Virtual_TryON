@@ -1,4 +1,4 @@
-#!/workspaces/codespaces-blank/venv/bin/python
+#!/workspaces/codespaces-blank/venv/bin/python3.10
 import sys
 from cli.split import main
 if __name__ == '__main__':
