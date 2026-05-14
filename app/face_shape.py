@@ -61,16 +61,6 @@ def classify_face_shape(landmarks):
     forehead_ratio = forehead_width / cheekbone_width
 
     # -------------------------
-    # DEBUG VALUES
-    # -------------------------
-
-    print({
-        "face_ratio": round(face_ratio, 2),
-        "jaw_ratio": round(jaw_ratio, 2),
-        "forehead_ratio": round(forehead_ratio, 2)
-    })
-
-    # -------------------------
     # CLASSIFICATION
     # -------------------------
 
@@ -79,29 +69,56 @@ def classify_face_shape(landmarks):
         face_ratio < 1.28 and
         jaw_ratio > 0.83
     ):
-        return "Round"
+
+        detected_shape = "Round"
 
     # OVAL
     elif (
         face_ratio >= 1.33 and
         jaw_ratio < 0.83
     ):
-        return "Oval"
+
+        detected_shape = "Oval"
 
     # SQUARE
     elif (
         jaw_ratio >= 0.85 and
         forehead_ratio >= 0.90
     ):
-        return "Square"
+
+        detected_shape = "Square"
 
     # HEART
     elif (
         forehead_ratio > jaw_ratio and
         jaw_ratio < 0.80
     ):
-        return "Heart"
+
+        detected_shape = "Heart"
 
     # DIAMOND
     else:
-        return "Diamond"
+
+        detected_shape = "Diamond"
+
+    # -------------------------
+    # DEBUG VALUES
+    # -------------------------
+
+    print({
+        "shape": detected_shape,
+        "face_ratio": round(face_ratio, 2),
+        "jaw_ratio": round(jaw_ratio, 2),
+        "forehead_ratio": round(forehead_ratio, 2)
+    })
+
+    # -------------------------
+    # RETURN DICTIONARY
+    # -------------------------
+
+    return {
+        "shape": detected_shape,
+        "face_ratio": round(face_ratio, 2),
+        "jaw_ratio": round(jaw_ratio, 2),
+        "forehead_ratio": round(forehead_ratio, 2)
+    }
