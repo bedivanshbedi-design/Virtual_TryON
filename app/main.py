@@ -26,12 +26,20 @@ if uploaded_file:
 
     result = run_pipeline(image)
 
+    if result["image"] is not None:
+
+    display_image = result["image"]
+
+    # Convert BGR → RGB if needed
+    if len(display_image.shape) == 3:
+        display_image = display_image[:, :, ::-1]
+
     st.image(
-        result["image"],
+        display_image,
         caption="Uploaded Image",
         use_container_width=True
     )
-
+    
     st.subheader(f"Face Shape: {result['shape']}")
 
     st.subheader("Recommended Glasses")

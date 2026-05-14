@@ -20,7 +20,7 @@ def run_pipeline(image):
     recommendations = recommend_glasses(shape)
 
     return {
-        "image": image,
+        "image": image.copy(),
         "shape": shape,
         "recommendations": recommendations
     }
