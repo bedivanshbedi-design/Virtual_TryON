@@ -2,32 +2,52 @@ def classify_face_shape(landmarks):
     if landmarks is None:
         return "unknown"
 
-    points = landmarks.landmark
+    p = landmarks.landmark
 
     # Key points
-    left_jaw = points[234].x
-    right_jaw = points[454].x
+    left_jaw = p[234]
+    right_jaw = p[454]
 
-    left_forehead = points[127].x
-    right_forehead = points[356].x
+    left_forehead = p[127]
+    right_forehead = p[356]
 
-    chin = points[152].y
-    forehead_top = points[10].y
+    chin = p[152]
+    forehead_top = p[10]
+
+    # Optional: cheekbones (important for accuracy)
+    left_cheek = p[50]
+    right_cheek = p[280]
 
     # Measurements
-    jaw_width = right_jaw - left_jaw
-    forehead_width = right_forehead - left_forehead
-    face_height = chin - forehead_top
+    jaw_width = right_jaw.x - left_jaw.x
+    forehead_width = right_forehead.x - left_forehead.x
+    cheek_width = right_cheek.x - left_cheek.x
+    face_height = chin.y - forehead_top.y
 
-    ratio = face_height / jaw_width
+    # Ratios (normalize everything)
+    height_ratio = face_height / jaw_width
+    forehead_jaw_ratio = forehead_width / jaw_width
+    cheek_jaw_ratio = cheek_width / jaw_width
 
-    # Classification
-    if abs(jaw_width - forehead_width) < 0.10:
-        if ratio < 2.0:
-            return "Square"
-        else:
-            return "Oval"
-    elif forehead_width > jaw_width:
+    # ✅ High-sensitivity classification
+    if height_ratio > 1.45:
+        return "Oval"
+
+    elif cheek_jaw_ratio > 1.08 and cheek_width > forehead_width:
+        return "Diamond"
+
+    elif abs(forehead_jaw_ratio - 1.0) < 0.05:
+        return "Square"
+
+    elif forehead_jaw_ratio > 1.08:
         return "Heart"
-    else:
+
+    elif cheek_jaw_ratio > 1.02 and height_ratio < 1.35:
         return "Round"
+
+    else:
+        # fallback with subtle decision
+        if height_ratio > 1.35:
+            return "Oval"
+        else:
+            return "Round"
