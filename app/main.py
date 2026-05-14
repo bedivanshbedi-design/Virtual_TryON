@@ -1,51 +1,40 @@
 import streamlit as st
+import numpy as np
+from PIL import Image
+
 from inference import run_pipeline
 
-from PIL import Image
-import numpy as np
+
+st.set_page_config(page_title="AI Glass Recommender")
 
 st.title("AI Glass Recommender")
-st.markdown("Upload your photo and get personalized eyewear suggestions!")
 
-uploaded_file = st.file_uploader("Upload Image", type=["jpg", "png"])
+st.write(
+    "Upload your image and get glasses recommendations."
+)
 
-result = None
+uploaded_file = st.file_uploader(
+    "Upload Face Image",
+    type=["jpg", "jpeg", "png"]
+)
 
 if uploaded_file:
-    try:
-        # ✅ Convert uploaded file → numpy image (InsightFace compatible)
-        image = np.array(Image.open(uploaded_file).convert("RGB"))
 
-        # ✅ Pass numpy image (NOT raw file)
-        result = run_pipeline(image)
+    image = np.array(
+        Image.open(uploaded_file).convert("RGB")
+    )
 
-    except Exception as e:
-        st.error(f"Pipeline error: {e}")
-        result = None
+    result = run_pipeline(image)
 
+    st.image(
+        result["image"],
+        caption="Uploaded Image",
+        use_container_width=True
+    )
 
-# ✅ Show results
-if result is not None:
+    st.subheader(f"Face Shape: {result['shape']}")
 
-    # ✅ Display processed image safely (NO cv2)
-    if isinstance(result, dict) and result.get("image") is not None:
-        st.image(result["image"])
+    st.subheader("Recommended Glasses")
 
-    if isinstance(result, dict):
-        st.success(f"Face Shape: {result.get('shape', 'Unknown')}")
-        st.write("Recommended:", result.get("recommendations", []))
-
-    else:
-        # fallback if run_pipeline returns string
-        st.success(f"Face Shape: {result}")
-
-else:
-    st.info("Please upload an image to see results")
-
-
-# ✅ Download button (simple text export)
-st.download_button(
-    "Download Result",
-    data=str(result),
-    file_name="result.txt"
-)
+    for item in result["recommendations"]:
+        st.write(f"• {item}")
