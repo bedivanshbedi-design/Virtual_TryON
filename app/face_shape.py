@@ -2,68 +2,104 @@ import numpy as np
 
 
 def distance(p1, p2):
-    return np.linalg.norm(np.array(p1) - np.array(p2))
 
-
-def extract_features(landmarks):
-
-    # Forehead width
-    forehead_width = distance(
-        landmarks[127],
-        landmarks[356]
+    return np.linalg.norm(
+        np.array(p1) - np.array(p2)
     )
-
-    # Cheekbone width
-    cheekbone_width = distance(
-        landmarks[234],
-        landmarks[454]
-    )
-
-    # Jaw width
-    jaw_width = distance(
-        landmarks[172],
-        landmarks[397]
-    )
-
-    # Face height
-    face_height = distance(
-        landmarks[10],
-        landmarks[152]
-    )
-
-    features = {
-        "forehead_ratio": forehead_width / cheekbone_width,
-        "jaw_ratio": jaw_width / cheekbone_width,
-        "face_ratio": face_height / cheekbone_width
-    }
-
-    return features
 
 
 def classify_face_shape(landmarks):
 
-    f = extract_features(landmarks)
+    # -------------------------
+    # IMPORTANT LANDMARKS
+    # -------------------------
 
-    forehead = f["forehead_ratio"]
-    jaw = f["jaw_ratio"]
-    face = f["face_ratio"]
+    forehead_left = landmarks[54]
+    forehead_right = landmarks[284]
 
-    print(f)
+    cheek_left = landmarks[234]
+    cheek_right = landmarks[454]
+
+    jaw_left = landmarks[172]
+    jaw_right = landmarks[397]
+
+    chin = landmarks[152]
+    forehead_top = landmarks[10]
+
+    # -------------------------
+    # DISTANCES
+    # -------------------------
+
+    forehead_width = distance(
+        forehead_left,
+        forehead_right
+    )
+
+    cheekbone_width = distance(
+        cheek_left,
+        cheek_right
+    )
+
+    jaw_width = distance(
+        jaw_left,
+        jaw_right
+    )
+
+    face_length = distance(
+        forehead_top,
+        chin
+    )
+
+    # -------------------------
+    # NORMALIZED RATIOS
+    # -------------------------
+
+    face_ratio = face_length / cheekbone_width
+
+    jaw_ratio = jaw_width / cheekbone_width
+
+    forehead_ratio = forehead_width / cheekbone_width
+
+    # -------------------------
+    # DEBUG VALUES
+    # -------------------------
+
+    print({
+        "face_ratio": round(face_ratio, 2),
+        "jaw_ratio": round(jaw_ratio, 2),
+        "forehead_ratio": round(forehead_ratio, 2)
+    })
+
+    # -------------------------
+    # CLASSIFICATION
+    # -------------------------
 
     # ROUND
-    if face < 1.25:
+    if (
+        face_ratio < 1.28 and
+        jaw_ratio > 0.83
+    ):
         return "Round"
 
     # OVAL
-    elif face >= 1.25 and jaw < 0.85:
+    elif (
+        face_ratio >= 1.33 and
+        jaw_ratio < 0.83
+    ):
         return "Oval"
 
     # SQUARE
-    elif jaw >= 0.85 and forehead > 0.9:
+    elif (
+        jaw_ratio >= 0.85 and
+        forehead_ratio >= 0.90
+    ):
         return "Square"
 
     # HEART
-    elif forehead > jaw:
+    elif (
+        forehead_ratio > jaw_ratio and
+        jaw_ratio < 0.80
+    ):
         return "Heart"
 
     # DIAMOND
