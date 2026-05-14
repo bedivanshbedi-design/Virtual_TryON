@@ -57,4 +57,3 @@ def classify_face_shape(landmarks):
 
     # ✅ Return best match
     return max(scores, key=scores.get)
-``
