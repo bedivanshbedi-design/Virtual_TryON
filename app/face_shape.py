@@ -1,66 +1,62 @@
+import numpy as np
+
 def classify_face_shape(landmarks, image):
     if landmarks is None:
-        return "unknown"
+        return "No face detected"
 
-    h_img, w_img, _ = image.shape
     p = landmarks.landmark
 
-    # ✅ STEP 1: Get face bounding box
-    xs = [lm.x for lm in p]
-    ys = [lm.y for lm in p]
+    # ✅ Distance function (important improvement)
+    def dist(a, b):
+        return np.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
 
-    min_x, max_x = int(min(xs) * w_img), int(max(xs) * w_img)
-    min_y, max_y = int(min(ys) * h_img), int(max(ys) * h_img)
+    # ✅ Core measurements
+    jaw = dist(p[234], p[454])
+    forehead = dist(p[127], p[356])
+    cheek = dist(p[50], p[280])
+    height = dist(p[10], p[152])
 
-    face_w = max_x - min_x
-    face_h = max_y - min_y
+    # ✅ Advanced geometry (key improvement)
+    jaw_curve = dist(p[234], p[152]) + dist(p[454], p[152])
+    cheek_prominence = cheek - jaw
+    forehead_dominance = forehead - jaw
 
-    if face_w < 50 or face_h < 50:
-        return "face too small"
+    # ✅ Normalize
+    h = height / jaw
+    fw = forehead / jaw
+    jp = cheek_prominence
+    fd = forehead_dominance
+    jc = jaw_curve / jaw
 
-    # ✅ STEP 2: Normalize to face
-    def nx(x): return (x * w_img - min_x) / face_w
-    def ny(y): return (y * h_img - min_y) / face_h
+    # ✅ DEBUG (VERY IMPORTANT – keep this for now)
+    print(f"""
+    height_ratio: {h:.3f}
+    forehead_ratio: {fw:.3f}
+    cheek_prominence: {jp:.4f}
+    forehead_dominance: {fd:.4f}
+    jaw_curve: {jc:.3f}
+    """)
 
-    # Key features
-    jaw = nx(p[454].x) - nx(p[234].x)
-    forehead = nx(p[356].x) - nx(p[127].x)
-    cheek = nx(p[280].x) - nx(p[50].x)
-    height = ny(p[152].y) - ny(p[10].y)
+    # ✅ ✅ Final classification logic (robust ordering)
 
-    # ✅ STEP 3: Ratios
-    h_ratio = height / jaw
-    fw_ratio = forehead / jaw
-    cw_ratio = cheek / jaw
+    # Long face → Oval
+    if h > 1.45:
+        return "Oval"
 
-    # ✅ DEBUG (remove later if needed)
-    print(f"h={h_ratio:.3f}, fw={fw_ratio:.3f}, cw={cw_ratio:.3f}")
+    # Wide forehead
+    if fd > 0.015:
+        return "Heart"
 
-    # ✅ STEP 4: Scoring system
-    scores = {
-        "Oval": 0,
-        "Round": 0,
-        "Square": 0,
-        "Heart": 0,
-        "Diamond": 0
-    }
+    # Wide cheekbones
+    if jp > 0.015:
+        return "Diamond"
 
-    # Oval → taller than wide
-    scores["Oval"] += max(0, (h_ratio - 1.3)) * 5
+    # Short height
+    if h < 1.25:
+        return "Round"
 
-    # Round → shorter face
-    scores["Round"] += max(0, (1.3 - h_ratio)) * 5
+    # Flat / angular jaw
+    if jc < 2.15:
+        return "Square"
 
-    # Square → balanced widths
-    scores["Square"] += (1 - abs(fw_ratio - 1)) * 3
-
-    # Heart → wider forehead
-    scores["Heart"] += max(0, fw_ratio - 1.05) * 4
-
-    # Diamond → wider cheekbones
-    scores["Diamond"] += max(0, cw_ratio - 1.05) * 4
-
-    print("Scores:", scores)
-
-    # ✅ STEP 5: Return best match
-    return max(scores, key=scores.get)
+    return "Oval"
