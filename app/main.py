@@ -18,31 +18,48 @@ uploaded_file = st.file_uploader(
     type=["jpg", "jpeg", "png"]
 )
 
-if uploaded_file:
+if uploaded_file is not None:
 
-    image = np.array(
-        Image.open(uploaded_file).convert("RGB")
-    )
+    try:
 
-    result = run_pipeline(image)
+        # SAFE PIL IMAGE
+        pil_image = Image.open(uploaded_file).convert("RGB")
 
-    if result["image"] is not None:
+        # SAFE NUMPY IMAGE
+        image = np.array(pil_image).astype(np.uint8)
 
-        display_image = result["image"]
+        # RUN PIPELINE
+        result = run_pipeline(image)
 
-        # Convert BGR → RGB if needed
-        if len(display_image.shape) == 3:
-            display_image = display_image[:, :, ::-1]
-
+        # DISPLAY ORIGINAL IMAGE ONLY
+        # (Most stable for Streamlit Cloud)
         st.image(
-            display_image,
+            pil_image,
             caption="Uploaded Image",
             use_container_width=True
-        )   
+        )
 
-    st.subheader(f"Face Shape: {result['shape']}")
+        # FACE SHAPE
+        st.subheader(
+            f"Face Shape: {result.get('shape', 'Unknown')}"
+        )
 
-    st.subheader("Recommended Glasses")
+        # RECOMMENDATIONS
+        st.subheader("Recommended Glasses")
 
-    for item in result["recommendations"]:
-        st.write(f"• {item}")
+        recommendations = result.get(
+            "recommendations",
+            []
+        )
+
+        if recommendations:
+
+            for item in recommendations:
+                st.write(f"• {item}")
+
+        else:
+            st.write("No recommendations available")
+
+    except Exception as e:
+
+        st.error(f"Application Error: {str(e)}")

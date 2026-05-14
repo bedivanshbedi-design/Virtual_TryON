@@ -10,7 +10,6 @@ def run_pipeline(image):
     if landmarks is None:
 
         return {
-            "image": image,
             "shape": "No face detected",
             "recommendations": []
         }
@@ -20,7 +19,6 @@ def run_pipeline(image):
     recommendations = recommend_glasses(shape)
 
     return {
-        "image": image.copy(),
         "shape": shape,
         "recommendations": recommendations
     }
