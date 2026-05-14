@@ -18,6 +18,11 @@ uploaded_file = st.file_uploader(
     type=["jpg", "jpeg", "png"]
 )
 
+user_text = st.text_input(
+    "Where are you planning to wear these glasses?",
+    placeholder="Example: Wedding, office meeting, party, college..."
+)
+
 if uploaded_file is not None:
 
     try:
@@ -29,10 +34,11 @@ if uploaded_file is not None:
         image = np.array(pil_image).astype(np.uint8)
 
         # RUN PIPELINE
-        result = run_pipeline(image)
+        result = run_pipeline(image, user_text)
 
         # DISPLAY ORIGINAL IMAGE ONLY
         # (Most stable for Streamlit Cloud)
+
         st.image(
             pil_image,
             caption="Uploaded Image",
@@ -41,25 +47,40 @@ if uploaded_file is not None:
 
         # FACE SHAPE
         st.subheader(
-            f"Face Shape: {result.get('shape', 'Unknown')}"
+            f"Detected Face Shape: {result['shape']}"
+        )
+
+        # DETECTED EVENT
+        st.subheader(
+            f"Detected Event: {result['event']}"
+        )
+
+        st.write(
+            f"NLP Confidence: {result['event_confidence']}"
         )
 
         # RECOMMENDATIONS
-        st.subheader("Recommended Glasses")
-
-        recommendations = result.get(
-            "recommendations",
-            []
+        st.subheader(
+            "Recommended Glasses"
         )
 
-        if recommendations:
+        for item in result[
+            "recommendations"
+        ]:
 
-            for item in recommendations:
-                st.write(f"• {item}")
+            st.write(f"• {item}")
 
-        else:
-            st.write("No recommendations available")
+        # DEBUG METRICS
+        with st.expander(
+            "Face Metrics"
+        ):
+
+            st.write(
+                result["metrics"]
+            )
 
     except Exception as e:
 
-        st.error(f"Application Error: {str(e)}")
+        st.error(
+            f"Application Error: {str(e)}"
+        )

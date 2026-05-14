@@ -1,32 +1,86 @@
-FACE_SHAPE_MAP = {
+RECOMMENDATION_MAP = {
 
-    "Oval": [
-        "Rectangle Frames",
-        "Square Frames",
-        "Wayfarer"
-    ],
+    "Round": {
 
-    "Round": [
-        "Angular Frames",
-        "Rectangle Frames",
-        "Wayfarer"
-    ],
+        "office": [
+            "Rectangle Frames",
+            "Thin Metal Frames"
+        ],
 
-    "Square": [
-        "Round Frames",
-        "Oval Frames",
-        "Rimless"
-    ],
+        "wedding": [
+            "Gold Rectangle Frames",
+            "Premium Wayfarer"
+        ],
 
-    "Heart": [
-        "Aviator",
-        "Rimless",
-        "Cat Eye"
-    ],
+        "party": [
+            "Bold Angular Frames",
+            "Oversized Frames"
+        ],
 
-    "Diamond": [
-        "Oval Frames",
-        "Rimless",
-        "Cat Eye"
-    ]
+        "college": [
+            "Wayfarer",
+            "Transparent Frames"
+        ],
+
+        "date": [
+            "Minimal Black Frames",
+            "Soft Rectangle"
+        ]
+    },
+
+    "Oval": {
+
+        "office": [
+            "Thin Rectangle",
+            "Classic Wayfarer"
+        ],
+
+        "wedding": [
+            "Aviator",
+            "Luxury Metal Frames"
+        ],
+
+        "party": [
+            "Geometric Frames",
+            "Tinted Frames"
+        ],
+
+        "college": [
+            "Round Frames",
+            "Casual Wayfarer"
+        ],
+
+        "date": [
+            "Soft Oval Frames",
+            "Minimal Frames"
+        ]
+    },
+
+    "Square": {
+
+        "office": [
+            "Round Metal Frames",
+            "Oval Frames"
+        ],
+
+        "wedding": [
+            "Premium Round Frames",
+            "Rimless Frames"
+        ],
+
+        "party": [
+            "Bold Round Frames",
+            "Luxury Tinted"
+        ],
+
+        "college": [
+            "Casual Round Frames",
+            "Transparent Oval"
+        ],
+
+        "date": [
+            "Thin Oval Frames",
+            "Minimal Round"
+        ]
+    }
 }

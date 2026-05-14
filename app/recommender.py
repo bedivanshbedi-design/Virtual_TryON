@@ -1,9 +1,18 @@
-from mappings import FACE_SHAPE_MAP
+from mappings import RECOMMENDATION_MAP
 
 
-def recommend_glasses(shape):
+def recommend_glasses(face_shape, event):
 
-    return FACE_SHAPE_MAP.get(
-        shape,
-        ["Standard Frame"]
+    # Face shape recommendations
+    face_data = RECOMMENDATION_MAP.get(
+        face_shape,
+        {}
     )
+
+    # Event-specific recommendations
+    recommendations = face_data.get(
+        event,
+        ["Classic Wayfarer"]
+    )
+
+    return recommendations
