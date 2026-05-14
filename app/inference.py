@@ -31,7 +31,7 @@ def run_pipeline(image, user_text):
         "shape": face_shape,
         "recommendations": recommendations,
         "event": detected_event,
-        "event_confidence": event_result["confidence"]
+        "event_confidence": event_result["confidence"],
         "metrics": face_result
     }
 
