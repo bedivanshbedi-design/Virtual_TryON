@@ -1,18 +1,14 @@
 import cv2
-import mediapipe as mp
-print("MediaPipe imported successfully")
+from insightface.app import FaceAnalysis
 
-mp_face_mesh = mp.solutions.face_mesh
+# Initialize model (only once)
+app = FaceAnalysis(name="buffalo_l")
+app.prepare(ctx_id=0)  # CPU = 0, GPU = 1 (if available)
 
+def get_face(image):
+    faces = app.get(image)
 
-def get_landmarks(image):
-    with mp_face_mesh.FaceMesh(static_image_mode=True) as face_mesh:
-        rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        results = face_mesh.process(rgb)
+    if len(faces) == 0:
+        return None
 
-        if not results.multi_face_landmarks:
-            return None
-        
-        return results.multi_face_landmarks[0]
-
-
+    return faces[0]

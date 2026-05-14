@@ -1,4 +1,4 @@
-from face_detection import get_landmarks
+from face_detection import get_face
 from face_shape import classify_face_shape
 from recommender import recommend_glasses
 
@@ -15,8 +15,8 @@ def load_image(uploaded_file):
 def run_pipeline(uploaded_file):
     image = load_image(uploaded_file)
 
-    landmarks = get_landmarks(image)
-    shape = classify_face_shape(landmarks)
+    face = get_face(image)
+    shape = classify_face_shape(face)
     recs = recommend_glasses(shape)
 
     return {

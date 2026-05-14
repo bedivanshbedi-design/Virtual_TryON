@@ -3,4 +3,5 @@ FACE_SHAPE_MAP={
     "Round": ["Wayfarer","Angular"],
     "Square": ["Round", "Oval"],
     "Heart": ["Aviator","Rimless"]
+    "Diamond": ["Babe, Tera chehra hi kaint aa"]
 }

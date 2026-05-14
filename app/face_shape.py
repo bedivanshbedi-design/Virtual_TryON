@@ -1,62 +1,55 @@
 import numpy as np
 
-def classify_face_shape(landmarks, image):
-    if landmarks is None:
+def classify_face_shape(face, image):
+    if face is None:
         return "No face detected"
 
-    p = landmarks.landmark
+    # ✅ Get bounding box
+    x1, y1, x2, y2 = face.bbox.astype(int)
 
-    # ✅ Distance function (important improvement)
-    def dist(a, b):
-        return np.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+    face_crop = image[y1:y2, x1:x2]
 
-    # ✅ Core measurements
-    jaw = dist(p[234], p[454])
-    forehead = dist(p[127], p[356])
-    cheek = dist(p[50], p[280])
-    height = dist(p[10], p[152])
+    if face_crop.size == 0:
+        return "Face crop error"
 
-    # ✅ Advanced geometry (key improvement)
-    jaw_curve = dist(p[234], p[152]) + dist(p[454], p[152])
-    cheek_prominence = cheek - jaw
-    forehead_dominance = forehead - jaw
+    h, w, _ = face_crop.shape
 
-    # ✅ Normalize
-    h = height / jaw
-    fw = forehead / jaw
-    jp = cheek_prominence
-    fd = forehead_dominance
-    jc = jaw_curve / jaw
+    # ✅ Basic ratios (strong baseline)
+    aspect_ratio = h / w
 
-    # ✅ DEBUG (VERY IMPORTANT – keep this for now)
+    # ✅ Get keypoints (eyes, nose, mouth corners)
+    kps = face.kps  # shape: (5, 2)
+
+    left_eye, right_eye, nose, left_mouth, right_mouth = kps
+
+    # ✅ Feature distances
+    eye_width = np.linalg.norm(left_eye - right_eye)
+    mouth_width = np.linalg.norm(left_mouth - right_mouth)
+
+    # Normalize by face width
+    eye_ratio = eye_width / w
+    mouth_ratio = mouth_width / w
+
+    # ✅ DEBUG (important)
     print(f"""
-    height_ratio: {h:.3f}
-    forehead_ratio: {fw:.3f}
-    cheek_prominence: {jp:.4f}
-    forehead_dominance: {fd:.4f}
-    jaw_curve: {jc:.3f}
+    aspect_ratio: {aspect_ratio:.2f}
+    eye_ratio: {eye_ratio:.2f}
+    mouth_ratio: {mouth_ratio:.2f}
     """)
 
-    # ✅ ✅ Final classification logic (robust ordering)
+    # ✅ Classification logic (much more stable)
 
-    # Long face → Oval
-    if h > 1.45:
+    if aspect_ratio > 1.5:
         return "Oval"
 
-    # Wide forehead
-    if fd > 0.015:
-        return "Heart"
-
-    # Wide cheekbones
-    if jp > 0.015:
-        return "Diamond"
-
-    # Short height
-    if h < 1.25:
+    if aspect_ratio < 1.2:
         return "Round"
 
-    # Flat / angular jaw
-    if jc < 2.15:
+    if eye_ratio > 0.35:
         return "Square"
 
-    return "Oval"
+    if mouth_ratio < 0.25:
+        return "Heart"
+
+    return "Diamond"
+``
