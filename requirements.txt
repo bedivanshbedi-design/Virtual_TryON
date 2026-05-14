@@ -1,8 +1,4 @@
-insightface==0.7.3
 streamlit
-fastapi
-uvicorn
-numpy
+numpy==1.26.4
 pillow
-protobuf==3.20.3
-onnxruntime==1.17.3
+retina-face

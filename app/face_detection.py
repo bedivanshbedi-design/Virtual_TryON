@@ -1,8 +1,10 @@
-from insightface.app import FaceAnalysis
-
-app = FaceAnalysis()
-app.prepare(ctx_id=0)
+from retinaface import RetinaFace
 
 def get_face(image):
-    faces = app.get(image)
-    return faces[0] if len(faces) > 0 else None
+    faces = RetinaFace.detect_faces(image)
+
+    if not faces:
+        return None
+
+    key = list(faces.keys())[0]
+    return faces[key]
