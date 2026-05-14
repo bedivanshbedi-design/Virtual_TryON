@@ -2,7 +2,6 @@ insightface==0.7.3
 streamlit
 fastapi
 uvicorn
-opencv-python-headless==4.9.0.80
 numpy
 pillow
 protobuf==3.20.3
