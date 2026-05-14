@@ -1,8 +1,8 @@
-def classify_face_shape(face_landmarks):
-    if face_landmarks is None:
+def classify_face_shape(landmarks):
+    if landmarks is None:
         return "unknown"
 
-    points = face_landmarks.landmark
+    points = landmarks.landmark
 
     # Key points
     left_jaw = points[234].x
