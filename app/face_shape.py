@@ -5,38 +5,29 @@ def classify_face_shape(landmarks):
     points = landmarks.landmark
 
     # Key points
-    left_jaw = points[234]
-    right_jaw = points[454]
+    left_jaw = points[234].x
+    right_jaw = points[454].x
 
-    left_forehead = points[127]
-    right_forehead = points[356]
+    left_forehead = points[127].x
+    right_forehead = points[356].x
 
-    chin = points[152]
-    forehead_top = points[10]
+    chin = points[152].y
+    forehead_top = points[10].y
 
     # Measurements
-    jaw_width = right_jaw.x - left_jaw.x
-    forehead_width = right_forehead.x - left_forehead.x
-    face_height = chin.y - forehead_top.y
+    jaw_width = right_jaw - left_jaw
+    forehead_width = right_forehead - left_forehead
+    face_height = chin - forehead_top
 
     ratio = face_height / jaw_width
 
-    width_diff = abs(jaw_width - forehead_width)
-
     # Classification
-   
-   if ratio > 1.35:
-        return "Oval"
-
-    elif width_diff < 0.04:
-        return "Square"
-
-    elif forehead_width > jaw_width * 1.05:
+    if abs(jaw_width - forehead_width) < 0.04:
+        if ratio < 1.3:
+            return "Square"
+        else:
+            return "Oval"
+    elif forehead_width > jaw_width:
         return "Heart"
-
-    elif jaw_width > forehead_width * 1.05:
-        return "Round"
-
     else:
-        return "Oval"
-
+        return "Round"
