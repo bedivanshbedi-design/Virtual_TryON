@@ -22,8 +22,8 @@ def classify_face_shape(landmarks):
     ratio = face_height / jaw_width
 
     # Classification
-    if abs(jaw_width - forehead_width) < 0.04:
-        if ratio < 1.3:
+    if abs(jaw_width - forehead_width) < 0.10:
+        if ratio < 2.0:
             return "Square"
         else:
             return "Oval"
