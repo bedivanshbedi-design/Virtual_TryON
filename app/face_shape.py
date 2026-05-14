@@ -7,52 +7,54 @@ def classify_face_shape(landmarks):
     # Key points
     left_jaw = p[234]
     right_jaw = p[454]
-
     left_forehead = p[127]
     right_forehead = p[356]
-
     chin = p[152]
     forehead_top = p[10]
-
     left_cheek = p[50]
     right_cheek = p[280]
 
     # Measurements
-    jaw_width = right_jaw.x - left_jaw.x
-    forehead_width = right_forehead.x - left_forehead.x
-    cheek_width = right_cheek.x - left_cheek.x
-    face_height = chin.y - forehead_top.y
+    jaw = right_jaw.x - left_jaw.x
+    forehead = right_forehead.x - left_forehead.x
+    cheek = right_cheek.x - left_cheek.x
+    height = chin.y - forehead_top.y
 
     # Ratios
-    height_ratio = face_height / jaw_width
-    fw_jaw = forehead_width / jaw_width
-    cheek_jaw = cheek_width / jaw_width
+    h = height / jaw
+    fw = forehead / jaw
+    cw = cheek / jaw
 
-    # ✅ DEBUG (important)
-    print(f"h:{height_ratio:.2f}, fw:{fw_jaw:.2f}, cheek:{cheek_jaw:.2f}")
+    # ✅ Scores (this is the KEY)
+    scores = {
+        "Oval": 0,
+        "Round": 0,
+        "Square": 0,
+        "Heart": 0,
+        "Diamond": 0
+    }
 
-    # ✅ PRIORITY ORDER (important)
+    # ✅ Add contributions instead of hard rules
 
-    # 1. Oval → tall face
-    if height_ratio > 1.45:
-        return "Oval"
+    # Oval → tall face
+    scores["Oval"] += max(0, h - 1.3) * 5
 
-    # 2. Heart → wide forehead, narrow jaw
-    if fw_jaw > 1.10:
-        return "Heart"
+    # Round → short + wide
+    scores["Round"] += max(0, 1.3 - h) * 5
 
-    # 3. Diamond → wide cheekbones
-    if cheek_jaw > 1.10:
-        return "Diamond"
+    # Square → equal widths
+    scores["Square"] += max(0, 1 - abs(fw - 1)) * 3
 
-    # 4. Round → wide face, low height
-    if height_ratio < 1.30:
-        return "Round"
+    # Heart → wide forehead
+    scores["Heart"] += max(0, fw - 1.05) * 4
 
-    # 5. Square → LAST (strict condition)
-    if abs(fw_jaw - 1.0) < 0.03 and height_ratio < 1.40:
-        return "Square"
+    # Diamond → wide cheekbones
+    scores["Diamond"] += max(0, cw - 1.05) * 4
 
-    # fallback
-    return "Oval"
+    # ✅ Debug (VERY useful)
+    print("Ratios:", f"h={h:.2f}, fw={fw:.2f}, cw={cw:.2f}")
+    print("Scores:", scores)
+
+    # ✅ Return best match
+    return max(scores, key=scores.get)
 ``
