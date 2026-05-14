@@ -1,9 +1,8 @@
 import cv2
-import mediapipe as mp
 
-mp_face_mesh = mp.solutions.face_mesh
+from mediapipe.python.solutions.face_mesh import FaceMesh
 
-face_mesh = mp_face_mesh.FaceMesh(
+face_mesh = FaceMesh(
     static_image_mode=True,
     max_num_faces=1,
     refine_landmarks=True,
@@ -19,13 +18,12 @@ def get_landmarks(image):
     if not results.multi_face_landmarks:
         return None
 
-    face_landmarks = results.multi_face_landmarks[0]
-
     h, w, _ = image.shape
 
     landmarks = []
 
-    for lm in face_landmarks.landmark:
+    for lm in results.multi_face_landmarks[0].landmark:
+
         x = int(lm.x * w)
         y = int(lm.y * h)
 
