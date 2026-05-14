@@ -4,3 +4,4 @@ uvicorn
 opencv-python-headless
 numpy
 pillow
+mediapipe

@@ -1,22 +1,33 @@
-def classify_face_shape(landmarks):
-    if landmarks is None or len(landmarks) == 0:
+def classify_face_shape(face_landmarks):
+    if face_landmarks is None:
         return "unknown"
 
-    (x, y, w, h) = landmarks[0]
+    points = face_landmarks.landmark
 
-    face_width = int(w*0.85)
-    face_height = int(h*0.9)
+    # Key points
+    left_jaw = points[234].x
+    right_jaw = points[454].x
 
-    if face_width == 0:
-        return "unknown"
+    left_forehead = points[127].x
+    right_forehead = points[356].x
 
-    ratio = face_height/face_width
+    chin = points[152].y
+    forehead_top = points[10].y
 
-    if ratio > 1.4:
-        return "Oval"
-    elif 1.15 < ratio <= 1.4:
+    # Measurements
+    jaw_width = right_jaw - left_jaw
+    forehead_width = right_forehead - left_forehead
+    face_height = chin - forehead_top
+
+    ratio = face_height / jaw_width
+
+    # Classification
+    if abs(jaw_width - forehead_width) < 0.02:
+        if ratio < 1.2:
+            return "Square"
+        else:
+            return "Oval"
+    elif forehead_width > jaw_width:
         return "Heart"
-    elif 0.95 < ratio < 1.15:
-        return "Round"
     else:
-        return "Square"
+        return "Round"

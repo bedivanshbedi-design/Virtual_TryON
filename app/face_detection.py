@@ -1,4 +1,7 @@
 import cv2
+import mediapipe as mediapipe
+
+mp_face_mesh = mp.solutions.mp_face_mesh
 
 # Load pre-trained Haar cascade
 face_cascade = cv2.CascadeClassifier(
@@ -6,23 +9,13 @@ face_cascade = cv2.CascadeClassifier(
 )
 
 def get_landmarks(image):
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    with mp_face_mesh.FaceMesh(static_image_mode=True) as face_mesh:
+        rgb = cv2.cvtCOlor(image, cv2.COLOR_BGR2BGR)
+        results = face_mesh.multi_face_landmarks:
 
-    faces = face_cascade.detectMultiScale(
-        gray,
-        scaleFactor=1.2,
-        minNeighbors=8,
-        )
+        if not results.multi_face_landmarks:
+            return None
+        
+        return results.multi_face_landmarks[0]
 
-    if len(faces) == 0:
-        return None
-
-    faces = sorted(faces, key = lambda x: x[2]*x[3], reverse=True)
-    
-    landmarks = []
-
-    for (x, y, w, h) in faces:
-        landmarks.append((x, y, w, h))
-
-    return landmarks
 
