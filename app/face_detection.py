@@ -1,10 +1,18 @@
-from retinaface import RetinaFace
+import face_recognition
 
 def get_face(image):
-    faces = RetinaFace.detect_faces(image)
+    # Detect face locations
+    face_locations = face_recognition.face_locations(image)
 
-    if not faces:
+    if len(face_locations) == 0:
         return None
 
-    key = list(faces.keys())[0]
-    return faces[key]
+    top, right, bottom, left = face_locations[0]
+
+    return {
+        "top": top,
+        "right": right,
+        "bottom": bottom,
+        "left": left
+    }
+``

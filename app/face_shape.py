@@ -2,9 +2,8 @@ def classify_face_shape(face):
     if face is None:
         return "No face detected"
 
-    x1, y1, x2, y2 = face["facial_area"]
-    width = x2 - x1
-    height = y2 - y1
+    width = face["right"] - face["left"]
+    height = face["bottom"] - face["top"]
 
     ratio = height / width
 
@@ -16,4 +15,3 @@ def classify_face_shape(face):
         return "Square"
     else:
         return "Diamond"
-``

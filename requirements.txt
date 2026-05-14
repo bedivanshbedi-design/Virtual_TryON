@@ -1,6 +1,4 @@
 streamlit
 numpy==1.26.4
 pillow
-retina-face
-tensorflow==2.13.1
-keras==2.13.1
+face_recognition
