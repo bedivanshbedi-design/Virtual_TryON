@@ -1,7 +1,7 @@
+mediapipe>=0.10.14
 streamlit
 fastapi
 uvicorn
-opencv-python-headless==4.10.0.84
+opencv-python-headless==4.9.0.80
 numpy
 pillow
-mediapipe
