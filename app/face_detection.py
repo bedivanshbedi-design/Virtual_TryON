@@ -1,11 +1,8 @@
 import cv2
 import mediapipe as mediapipe
 
-mp_face_mesh = mp.solutions.mp_face_mesh
+mp_face_mesh = mp.solutions.face_mesh
 
-# Load pre-trained Haar cascade
-face_cascade = cv2.CascadeClassifier(
-    cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 )
 
 def get_landmarks(image):
