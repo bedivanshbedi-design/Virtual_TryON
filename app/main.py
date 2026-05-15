@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 from PIL import Image
+from database import save_result
 
 from inference import run_pipeline
 
@@ -84,3 +85,14 @@ if uploaded_file is not None:
         st.error(
             f"Application Error: {str(e)}"
         )
+
+image_url = save_result(
+    pil_image,
+    result
+)
+
+st.success(
+    "Image saved successfully!"
+)
+
+st.write(image_url)
