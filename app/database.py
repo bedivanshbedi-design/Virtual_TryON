@@ -20,10 +20,10 @@ cloudinary.config(
 # MONGODB CONFIG
 # -------------------------
 
-MONGO_URL = st.secrets["mongodb+srv://bedivanshbedi_db_user:<db_password>@cluster0.bxvb46a.mongodb.net/?appName=Cluster0"]
+MONGO_URL = st.secrets["MONGO_URL"]
 
 client = MongoClient(
-    "mongodb+srv://bedivanshbedi_db_user:<db_password>@cluster0.bxvb46a.mongodb.net/?appName=Cluster0",
+    MONGO_URL,
     tlsCAFile=certifi.where()
     )
 
