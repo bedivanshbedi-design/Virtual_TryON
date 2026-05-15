@@ -12,7 +12,7 @@ from datetime import datetime
 cloudinary.config(
     cloud_name="dqvl1rndj",
     api_key="417383256219875",
-    api_secret="**********"
+    api_secret="sjtYV2ZJgybcKbX3Q7aLaxQyI0k"
 )
 
 # -------------------------
@@ -45,7 +45,7 @@ def save_result(pil_image,result):
     result = cloudinary.uploader.upload(
         buffer
     )
-    
+
     image_url = upload_result[
         "secure_url"
     ]
