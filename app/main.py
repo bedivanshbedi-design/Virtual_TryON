@@ -85,6 +85,10 @@ if uploaded_file is not None:
         st.error(
             f"Application Error: {str(e)}"
         )
+        
+from PIL import Image
+
+pil_image = Image.open(uploaded_file)
 
 image_url = save_result(
     pil_image,
