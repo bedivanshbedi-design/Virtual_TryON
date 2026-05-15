@@ -42,7 +42,7 @@ def save_result(pil_image,result):
 
     buffer.seek(0)
 
-    result = cloudinary.uploader.upload(
+    upload_result = cloudinary.uploader.upload(
         buffer
     )
 
