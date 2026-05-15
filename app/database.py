@@ -3,6 +3,7 @@ import cloudinary.uploader
 import io
 from pymongo import MongoClient
 from datetime import datetime
+import certifi
 
 
 # -------------------------
@@ -19,14 +20,41 @@ cloudinary.config(
 # MONGODB CONFIG
 # -------------------------
 
+MONGO_URL = st.secrets["mongodb+srv://bedivanshbedi_db_user:<db_password>@cluster0.bxvb46a.mongodb.net/?appName=Cluster0"]
+
 client = MongoClient(
     "mongodb+srv://bedivanshbedi_db_user:<db_password>@cluster0.bxvb46a.mongodb.net/?appName=Cluster0"
-)
+    tlsCAFile=certifi.where()
+    )
 
 db = client["ai_glasses_db"]
 
 collection = db["recommendations"]
 
+# Store metadata
+data = {
+
+    "image_url": image_url,
+
+    "face_shape": result[
+        "shape"
+    ],
+
+    "event": result[
+        "event"
+    ],
+
+    "recommendations": result[
+        "recommendations"
+    ],
+
+    "timestamp": datetime.utcnow()
+}
+
+
+def save_metadata(data):
+
+    collection.insert_one(data)
 
 # -------------------------
 # SAVE FUNCTION
@@ -50,26 +78,5 @@ def save_result(pil_image,result):
         "secure_url"
     ]
 
-    # Store metadata
-    data = {
-
-        "image_url": image_url,
-
-        "face_shape": result[
-            "shape"
-        ],
-
-        "event": result[
-            "event"
-        ],
-
-        "recommendations": result[
-            "recommendations"
-        ],
-
-        "timestamp": datetime.utcnow()
-    }
-
-    collection.insert_one(data)
 
     return image_url
