@@ -12,7 +12,8 @@ def recommend_glasses(face_shape, event):
     # Event-specific recommendations
     recommendations = face_data.get(
         event,
-        ["Classic Wayfarer"]
+        []
     )
 
     return recommendations
+

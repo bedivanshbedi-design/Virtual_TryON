@@ -3,84 +3,146 @@ RECOMMENDATION_MAP = {
     "Round": {
 
         "office": [
-            "Rectangle Frames",
-            "Thin Metal Frames"
+            {
+                "frame": "Rectangle Frames",
+                "products": [
+                    {
+                        "name": "Lenskart Rectangle Eyeglasses",
+                        "url": "https://www.lenskart.com/rectangle-eyeglasses.html",
+                        "price": "₹1999",
+                        "image": "https://static.lenskart.com/media/catalog/product/1.jpg"
+                    },
+                    {
+                        "name": "Amazon Rectangle Frame",
+                        "url": "https://amzn.to/rectangle1",
+                        "price": "₹1499",
+                        "image": "https://m.media-amazon.com/images/I/rectangle.jpg"
+                    }
+                ]
+            },
+            {
+                "frame": "Thin Metal Frames",
+                "products": [
+                    {
+                        "name": "Titan Thin Metal Frame",
+                        "url": "https://www.titaneyeplus.com/thin-metal",
+                        "price": "₹2499",
+                        "image": "https://titanimages.com/metal.jpg"
+                    }
+                ]
+            }
         ],
 
         "wedding": [
-            "Gold Rectangle Frames",
-            "Premium Wayfarer"
+            {
+                "frame": "Gold Rectangle Frames",
+                "products": [
+                    {
+                        "name": "Gold Premium Frame",
+                        "url": "https://amzn.to/goldframe",
+                        "price": "₹2999",
+                        "image": "https://m.media-amazon.com/images/I/gold.jpg"
+                    }
+                ]
+            },
+            {
+                "frame": "Premium Wayfarer",
+                "products": [
+                    {
+                        "name": "RayBan Wayfarer",
+                        "url": "https://amzn.to/rayban",
+                        "price": "₹5999",
+                        "image": "https://m.media-amazon.com/images/I/rayban.jpg"
+                    }
+                ]
+            }
         ],
 
         "party": [
-            "Bold Angular Frames",
-            "Oversized Frames"
+            {
+                "frame": "Bold Angular Frames",
+                "products": [
+                    {
+                        "name": "Bold Designer Frame",
+                        "url": "https://amzn.to/bold",
+                        "price": "₹1799",
+                        "image": "https://m.media-amazon.com/images/I/bold.jpg"
+                    }
+                ]
+            }
         ],
 
         "college": [
-            "Wayfarer",
-            "Transparent Frames"
+            {
+                "frame": "Wayfarer",
+                "products": [
+                    {
+                        "name": "Casual Wayfarer",
+                        "url": "https://amzn.to/wayfarer",
+                        "price": "₹1299",
+                        "image": "https://m.media-amazon.com/images/I/wayfarer.jpg"
+                    }
+                ]
+            }
         ],
 
         "date": [
-            "Minimal Black Frames",
-            "Soft Rectangle"
+            {
+                "frame": "Minimal Black Frames",
+                "products": [
+                    {
+                        "name": "Minimal Black Frame",
+                        "url": "https://amzn.to/minimal",
+                        "price": "₹1599",
+                        "image": "https://m.media-amazon.com/images/I/minimal.jpg"
+                    }
+                ]
+            }
         ]
     },
 
     "Oval": {
-
         "office": [
-            "Thin Rectangle",
-            "Classic Wayfarer"
+            {
+                "frame": "Thin Rectangle",
+                "products": [
+                    {
+                        "name": "Slim Rectangle Frame",
+                        "url": "https://amzn.to/slimrect",
+                        "price": "₹1499",
+                        "image": "https://m.media-amazon.com/images/I/slim.jpg"
+                    }
+                ]
+            }
         ],
-
         "wedding": [
-            "Aviator",
-            "Luxury Metal Frames"
-        ],
-
-        "party": [
-            "Geometric Frames",
-            "Tinted Frames"
-        ],
-
-        "college": [
-            "Round Frames",
-            "Casual Wayfarer"
-        ],
-
-        "date": [
-            "Soft Oval Frames",
-            "Minimal Frames"
+            {
+                "frame": "Aviator",
+                "products": [
+                    {
+                        "name": "Classic Aviator",
+                        "url": "https://amzn.to/aviator",
+                        "price": "₹1999",
+                        "image": "https://m.media-amazon.com/images/I/aviator.jpg"
+                    }
+                ]
+            }
         ]
     },
 
     "Square": {
-
         "office": [
-            "Round Metal Frames",
-            "Oval Frames"
-        ],
-
-        "wedding": [
-            "Premium Round Frames",
-            "Rimless Frames"
-        ],
-
-        "party": [
-            "Bold Round Frames",
-            "Luxury Tinted"
-        ],
-
-        "college": [
-            "Casual Round Frames",
-            "Transparent Oval"
-        ],
-
-        "date": [
-            "Thin Oval Frames",
-            "Minimal Round"
+            {
+                "frame": "Round Metal Frames",
+                "products": [
+                    {
+                        "name": "Round Metal Glasses",
+                        "url": "https://amzn.to/roundmetal",
+                        "price": "₹1399",
+                        "image": "https://m.media-amazon.com/images/I/round.jpg"
+                    }
+                ]
+            }
         ]
     }
 }
