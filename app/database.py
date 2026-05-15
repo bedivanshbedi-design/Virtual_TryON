@@ -11,9 +11,9 @@ import streamlit as st
 # -------------------------
 
 cloudinary.config(
-    cloud_name="dqvl1rndj",
-    api_key="417383256219875",
-    api_secret="sjtYV2ZJgybcKbX3Q7aLaxQyI0k"
+    CLOUD_NAME="dqvl1rndj",
+    API_KEY="417383256219875",
+    API_SECRET="sjtYV2ZJgybcKbX3Q7aLaxQyI0k"
 )
 
 # -------------------------
