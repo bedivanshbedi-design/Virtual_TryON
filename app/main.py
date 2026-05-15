@@ -71,25 +71,25 @@ if uploaded_file is not None:
 
             st.write(f"• {item}")
 
-        st.markdown(f"### {item['frame']}")
+            st.markdown(f"### {item['frame']}")
 
-        products = item.get("products", [])
+            products = item.get("products", [])
 
-        if not products:
-            st.info("No products available")
-            continue
+            if not products:
+                st.info("No products available")
+                continue
 
-        # Display in grid
-        cols = st.columns(3)
+            # Display in grid
+            cols = st.columns(3)
 
-        for i, product in enumerate(products):
-            with cols[i % 3]:
-                st.image(product["image"])
-                st.write(product["name"])
-                st.write(product["price"])
-                st.markdown(
-                    f"[🛒 Buy Now]({product['url']})"
-                )
+            for i, product in enumerate(products):
+                with cols[i % 3]:
+                    st.image(product["image"])
+                    st.write(product["name"])
+                    st.write(product["price"])
+                    st.markdown(
+                        f"[🛒 Buy Now]({product['url']})"
+                    )
 
         # DEBUG METRICS
         with st.expander(
