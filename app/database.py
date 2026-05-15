@@ -1,6 +1,6 @@
 import cloudinary
 import cloudinary.uploader
-
+import io
 from pymongo import MongoClient
 from datetime import datetime
 
@@ -32,16 +32,20 @@ collection = db["recommendations"]
 # SAVE FUNCTION
 # -------------------------
 
-def save_result(
-    pil_image,
-    result
-):
+def save_result(pil_image,result):
 
-    # Upload image
-    upload_result = cloudinary.uploader.upload(
-        pil_image
+    buffer = io.BytesIO()
+    pil_image.save(
+    buffer,
+    format="JPEG"
     )
 
+    buffer.seek(0)
+
+    result = cloudinary.uploader.upload(
+        buffer
+    )
+    
     image_url = upload_result[
         "secure_url"
     ]
