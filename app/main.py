@@ -80,23 +80,22 @@ if uploaded_file is not None:
                 result["metrics"]
             )
 
+        image_url = save_result(
+        pil_image,
+        result
+        )
+
+        st.success(
+        "Image saved successfully!"
+        )
+
+        st.write(image_url)
+
     except Exception as e:
 
         st.error(
             f"Application Error: {str(e)}"
         )
-        
-from PIL import Image
 
-pil_image = Image.open(uploaded_file)
 
-image_url = save_result(
-    pil_image,
-    result
-)
 
-st.success(
-    "Image saved successfully!"
-)
-
-st.write(image_url)
