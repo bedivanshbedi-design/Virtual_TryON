@@ -69,7 +69,7 @@ if uploaded_file is not None:
             "recommendations"
         ]:
 
-            st.write(f"• {item}")
+            
 
             st.markdown(f"### {item['frame']}")
 
@@ -80,15 +80,16 @@ if uploaded_file is not None:
                 continue
 
             # Display in grid
-            cols = st.columns(3)
+            cols = st.columns(min(len(products), 3))
 
             for i, product in enumerate(products):
-                with cols[i % 3]:
+                with cols[i % len(cols)]:
                     st.image(product["image"])
                     st.write(product["name"])
                     st.write(product["price"])
                     st.markdown(
-                        f"[🛒 Buy Now]({product['url']})"
+                        f"[🛒 Buy Now]({product['url']})",
+                        unsafe_allow_html=True
                     )
 
         # DEBUG METRICS

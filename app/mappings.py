@@ -8,15 +8,15 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Lenskart Rectangle Eyeglasses",
-                        "url": "https://www.lenskart.com/rectangle-eyeglasses.html",
+                        "url": "https://www.lenskart.com/john-jacobs-rimless-jj-e12610-c3-eyeglasses.html",
                         "price": "₹1999",
-                        "image": "https://static.lenskart.com/media/catalog/product/1.jpg"
+                        "image": "https://www.lenskart.com/john-jacobs-rimless-jj-e12610-c3-eyeglasses.html"
                     },
                     {
                         "name": "Amazon Rectangle Frame",
-                        "url": "https://amzn.to/rectangle1",
+                        "url": https://www.amazon.in/Rectangular-Sunglasses/s?k=Rectangular+Sunglasses",
                         "price": "₹1499",
-                        "image": "https://m.media-amazon.com/images/I/rectangle.jpg"
+                        "image": "https://www.amazon.in/Rectangle-Sunglasses-Trendy-Aesthetic-Vintage/dp/B09BZN486L"
                     }
                 ]
             },
@@ -25,9 +25,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Titan Thin Metal Frame",
-                        "url": "https://www.titaneyeplus.com/thin-metal",
+                        "url": "https://www.titaneyeplus.com/eyeglasses/frame-material/metal?srsltid=AfmBOopspUWJ1-0wXC16MEL0T3ZzxvZBZA7XZhIawJfI9KrJ7tNTTv1H",
                         "price": "₹2499",
-                        "image": "https://titanimages.com/metal.jpg"
+                        "image": "https://www.titaneyeplus.com/product/gold-rectangle-eyeglasses-for-men-and-women-ta00129uhm1mglv#gallery-1"
                     }
                 ]
             }
@@ -39,9 +39,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Gold Premium Frame",
-                        "url": "https://amzn.to/goldframe",
+                        "url": "https://chashmah.com/golden-modern-turban-fit-eyeglasses-30006/",
                         "price": "₹2999",
-                        "image": "https://m.media-amazon.com/images/I/gold.jpg"
+                        "image": "https://chashmah.com/golden-modern-turban-fit-eyeglasses-30006/"
                     }
                 ]
             },
@@ -50,9 +50,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "RayBan Wayfarer",
-                        "url": "https://amzn.to/rayban",
+                        "url": "https://india.ray-ban.com/ray-ban-meta-wayfarer-0rw401250601st3.html?srsltid=AfmBOorZZkXdNPAvyaZ0E2_SqJkZDChzF624Tj-XdiwQyiiwFBBSNoP8",
                         "price": "₹5999",
-                        "image": "https://m.media-amazon.com/images/I/rayban.jpg"
+                        "image": "https://india.ray-ban.com/0rb2140-green-901.html?srsltid=AfmBOooGPSSdN3O_G9Hfo8qsYE4HTSEj5Pwra1Lgl1AD9_D-itM8pQKn"
                     }
                 ]
             }
@@ -64,9 +64,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Bold Designer Frame",
-                        "url": "https://amzn.to/bold",
+                        "url": "https://www.lenskart.com/lenskart-air-la-e17002-c1-eyeglasses.html",
                         "price": "₹1799",
-                        "image": "https://m.media-amazon.com/images/I/bold.jpg"
+                        "image": "https://www.lenskart.com/lenskart-air-la-e17002-c1-eyeglasses.html"
                     }
                 ]
             }
@@ -78,9 +78,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Casual Wayfarer",
-                        "url": "https://amzn.to/wayfarer",
+                        "url": "https://www.fastrackeyewear.com/sunglasses/frame-shape/wayfarer?srsltid=AfmBOooB3iN1PjNn88q7hYP8qMyIk03LDqWVvoQmIa6nHja3wpigW6Ed",
                         "price": "₹1299",
-                        "image": "https://m.media-amazon.com/images/I/wayfarer.jpg"
+                        "image": "https://www.fastrackeyewear.com/sunglasses/frame-shape/wayfarer?srsltid=AfmBOooB3iN1PjNn88q7hYP8qMyIk03LDqWVvoQmIa6nHja3wpigW6Ed"
                     }
                 ]
             }
@@ -92,9 +92,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Minimal Black Frame",
-                        "url": "https://amzn.to/minimal",
+                        "url": "https://idee-eyewear.com/collections/black-eyeglass-frames/products/idee-2117fr?variant=39775604572289",
                         "price": "₹1599",
-                        "image": "https://m.media-amazon.com/images/I/minimal.jpg"
+                        "image": "https://idee-eyewear.com/collections/black-eyeglass-frames/products/idee-2117fr?variant=39775604572289"
                     }
                 ]
             }
@@ -108,9 +108,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Slim Rectangle Frame",
-                        "url": "https://amzn.to/slimrect",
+                        "url": "https://india.ray-ban.com/eyeglasses/rectangular-shape.html?srsltid=AfmBOoqHoZhM2ot4LkjY5_14fDsppPY9tZjQt1m_DGu43qKU41bp9-xd",
                         "price": "₹1499",
-                        "image": "https://m.media-amazon.com/images/I/slim.jpg"
+                        "image": "https://india.ray-ban.com/eyeglasses/rectangular-shape.html?srsltid=AfmBOoqHoZhM2ot4LkjY5_14fDsppPY9tZjQt1m_DGu43qKU41bp9-xd"
                     }
                 ]
             }
@@ -121,9 +121,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Classic Aviator",
-                        "url": "https://amzn.to/aviator",
+                        "url": https://india.ray-ban.com/sunglasses/most-popular/aviator.html?srsltid=AfmBOor6MJa9rhSt99fWYd7e7GWgm1mmyK1rO8M_vgkyK1KEvi6vlerC",
                         "price": "₹1999",
-                        "image": "https://m.media-amazon.com/images/I/aviator.jpg"
+                        "image": "https://india.ray-ban.com/sunglasses/most-popular/aviator.html?srsltid=AfmBOor6MJa9rhSt99fWYd7e7GWgm1mmyK1rO8M_vgkyK1KEvi6vlerC"
                     }
                 ]
             }
@@ -137,9 +137,9 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Round Metal Glasses",
-                        "url": "https://amzn.to/roundmetal",
+                        "url": "https://www.lenskart.com/eyeglasses/frame-shape/round.html",
                         "price": "₹1399",
-                        "image": "https://m.media-amazon.com/images/I/round.jpg"
+                        "image": "https://www.lenskart.com/eyeglasses/frame-shape/round.html"
                     }
                 ]
             }
