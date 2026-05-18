@@ -28,19 +28,11 @@ def run_pipeline(image, user_text):
 
     recommendations = recommend_glasses(face_shape,detected_event )
 
-    products = []
-    for f in recommendations:
-        products.extend(item.get("products", []))
-
-
-
-
     return {
         "shape": face_shape,
         "recommendations": recommendations,
         "event": detected_event,
         "event_confidence": event_result["confidence"],
         "metrics": face_result,
-        "products": products
     }
 

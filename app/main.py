@@ -37,6 +37,10 @@ if uploaded_file is not None:
         # RUN PIPELINE
         result = run_pipeline(image, user_text)
 
+        # ✅ ADD DEBUG HERE
+        st.write("DEBUG: Recommendations Data 👇")
+        st.json(result["recommendations"])
+
         # DISPLAY ORIGINAL IMAGE ONLY
         # (Most stable for Streamlit Cloud)
 
