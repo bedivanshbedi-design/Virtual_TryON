@@ -14,7 +14,7 @@ RECOMMENDATION_MAP = {
                     },
                     {
                         "name": "Amazon Rectangle Frame",
-                        "url": https://www.amazon.in/Rectangular-Sunglasses/s?k=Rectangular+Sunglasses",
+                        "url": "https://www.amazon.in/Rectangular-Sunglasses/s?k=Rectangular+Sunglasses",
                         "price": "₹1499",
                         "image": "https://www.amazon.in/Rectangle-Sunglasses-Trendy-Aesthetic-Vintage/dp/B09BZN486L"
                     }
@@ -121,7 +121,7 @@ RECOMMENDATION_MAP = {
                 "products": [
                     {
                         "name": "Classic Aviator",
-                        "url": https://india.ray-ban.com/sunglasses/most-popular/aviator.html?srsltid=AfmBOor6MJa9rhSt99fWYd7e7GWgm1mmyK1rO8M_vgkyK1KEvi6vlerC",
+                        "url": "https://india.ray-ban.com/sunglasses/most-popular/aviator.html?srsltid=AfmBOor6MJa9rhSt99fWYd7e7GWgm1mmyK1rO8M_vgkyK1KEvi6vlerC",
                         "price": "₹1999",
                         "image": "https://india.ray-ban.com/sunglasses/most-popular/aviator.html?srsltid=AfmBOor6MJa9rhSt99fWYd7e7GWgm1mmyK1rO8M_vgkyK1KEvi6vlerC"
                     }
