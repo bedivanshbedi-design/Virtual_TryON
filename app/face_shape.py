@@ -88,14 +88,6 @@ def classify_face_shape(landmarks):
 
         detected_shape = "Square"
 
-    # HEART
-    elif (
-        forehead_ratio > jaw_ratio and
-        jaw_ratio < 0.80
-    ):
-
-        detected_shape = "Heart"
-
     # DIAMOND
     else:
 

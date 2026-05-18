@@ -144,5 +144,35 @@ RECOMMENDATION_MAP = {
                 ]
             }
         ]
+    },
+    "Diamond": {
+        "party": [
+            {
+                "frame": "Oval Frames",
+                "products": [
+                    {
+                        "name": "Stylish Oval Frame",
+                        "url": "https://india.ray-ban.com/eyeglasses/rectangular-shape.html?srsltid=AfmBOoqHoZhM2ot4LkjY5_14fDsppPY9tZjQt1m_DGu43qKU41bp9-xd",
+                        "price": "₹1599",
+                        "image": "https://india.ray-ban.com/eyeglasses/rectangular-shape.html?srsltid=AfmBOoqHoZhM2ot4LkjY5_14fDsppPY9tZjQt1m_DGu43qKU41bp9-xd"
+                    }
+                ]
+            }
+        ],
+        "office": [
+            {
+                "frame": "Rimless Frames",
+                "products": [
+                    {
+                        "name": "Minimal Rimless",
+                        "url": "https://india.ray-ban.com/eyeglasses/rectangular-shape.html?srsltid=AfmBOoqHoZhM2ot4LkjY5_14fDsppPY9tZjQt1m_DGu43qKU41bp9-xd",
+                        "price": "₹1999",
+                        "image": "https://india.ray-ban.com/eyeglasses/rectangular-shape.html?srsltid=AfmBOoqHoZhM2ot4LkjY5_14fDsppPY9tZjQt1m_DGu43qKU41bp9-xd"
+                    }
+                ]
+            }
+        ]
     }
 }
+
+    
